@@ -1,11 +1,17 @@
+const { MessageEmbed } = require("discord.js");
+
 const execute = (bot, msg, args) => {
-  let string = "**Lista de Comandos**\n\n";
+  let string = "";
   bot.commands.forEach((command) => {
     if (command.help) {
       string += `**${process.env.PREFIX}${command.name}**: ${command.help}\n`;
     }
   });
-  return msg.channel.send(string);
+  let commandEmbed = new MessageEmbed()
+    .setTitle("Lista de Comandos")
+    .setDescription(string)
+    .setColor("#3d1e6d");
+  msg.channel.send(commandEmbed);
 };
 
 module.exports = {
